@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Taller de RMarkdown</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriela Sandoval" />
+    <link href="Presentacion_Dia1_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="Presentacion_Dia1_files/remark-css-0.0.1/rladies.css" rel="stylesheet" />
+    <link href="Presentacion_Dia1_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="Presentacion_Dia1_files/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+&lt;style type="text/css"&gt;
+.silver{color: silver;}
+.gray{color: darkgray;}
+&lt;/style&gt;
+
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;text&lt;/span&gt;&lt;/div&gt;
+--&gt;
+
+.pull-left[
+# Taller de RMarkdown
+## Data UC
+### .gray[Aprendamos sobre reportes automáticos y análisis reproducibles.]
+### .gray[Gabriela Sandoval]
+### .gray[14/mayo/2020]
+]
+
+.pull-right[
+.center[
+![](images/rmarkdown.png)
+]]
+---
+class: middle
+
+## Gaby Sandoval
+
+&lt;img class="circle" src="https://github.com/gabysandovalm.png" width="150px"/&gt;
+
+Estudiante del Doctorado en Estadística de la UC. 
+
+Co-organizadora de [RLadies-Santiago](https://www.meetup.com/es/rladies-scl/).
+
+Pueden encontrarme en:
+
+[<i class="fab  fa-twitter "></i>@gabysandovalm](http://twitter.com/gabysandovalm)  
+[<i class="fab  fa-github "></i> @gabysandovalm](http://github.com/gabysandovalm)
+
+---
+class: middle
+# Sobre el taller
+![](images/ciclo.png)
+&lt;small&gt;Ilustración por: Allison Horst, adaptación de: [R4DS](https://r4ds.had.co.nz/explore-intro.html)&lt;/small&gt;
+
+---
+class: middle
+# ¿Qué es necesario para este taller?
+
+- Conocer sobre R y RStudio (recomendable).
+- Tener una cuenta en **RStudio Cloud** (importante si queremos generar archivos en formato pdf y no tenemos instalado Miktex en nuestro computador).
+- Tener ganas de aprender algo que facilitará nuestro trabajo.
+
+## Objetivo: 
+&gt;Conocer la herramienta RMarkdown para generar reportes automáticos y hacer reproducibles nuestros análisis. 
+
+---
+class: middle
+# Generalidades sobre R
+- [**R**](https://www.r-project.org/about.html) es un **lenguaje** y entorno para computación estadística y gráficos. En este entorno se implementan técnicas estadísticas y se extiende muy facilmente a través de **paquetes**. Está disponible como software libre.
+
+- [**RStudio**](https://rstudio.com/products/rstudio/) es un **entorno de desarrollo integrado** (IDE) para R. Incluye varios elementos que facilitan las tareas que llevamos a cabo (entre ellas la generación de reportes). Esta disponible en versión open source y comercial. 
+
+---
+background-image: url(images/R.png)
+background-size: 90% 70%
+background-position: 50% 60%
+
+## .gray[Así es como se ve R] 
+
+
+---
+background-image: url(images/RStudio.PNG)
+background-size: 90% 70%
+background-position: 50% 60%
+
+## .gray[RStudio IDE]
+
+---
+background-image: url(images/RSC.png)
+background-size: 90% 70%
+background-position: 50% 60%
+## .gray[RStudio Cloud]
+
+---
+class: middle
+background-image: url(images/rm.jpg)
+background-size: 45%, 60%
+background-position: 95% 88%
+
+# ¿Qué es RMarkdown?
+
+&gt; Un marco de referencia para autoría de documentos para la ciencia de datos, combinando códigos, resultados y texto.
+
+# ¿Por qué RMarkdown?
+&lt;small&gt; .pull-left[
+Mis razones:
+
+Lo que necesito está en un solo archivo con extensión `.Rmd`.
+
+Se puede convertir a diferentes formatos.
+
+Es más facil entender lo que hice y evitar errores.
+
+Infinitas posibilidades para personalizar.
+
+Es **reproducible**.
+]
+&lt;/small&gt;
+---
+class: middle
+
+## .gray[De forma general se puede decir que:]
+
+Un archivos de R Markdown se puede usar de tres formas:
+
+1. **Comunicarse** con los tomadores de decisiones (interés en las conclusiones y no en el código).
+
+2. **Colaborar** con otros científicos, incluyendo a tu "yo" del futuro (interés en código y conclusiones )
+
+3. Un ambiente para hacer ciencia de datos como un **notebook** de laboratorio (capturar lo que hacemos y lo que estamos pensando cuando lo hacemos).
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;small&gt;Fuente: [R para Ciencia de Datos](https://es.r4ds.hadley.nz/r-markdown.html)
+---
+background-image: url(images/rmd.png), url(images/flujo.png)
+background-size: 45%, 60%
+background-position: 50% 25%, 50% 95%
+# ¿Cómo funciona? 
+Un archivo de RMarkdown es un archivo de texto plano con extensión `.Rmd`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## .gray[Flujo de trabajo]
+
+&lt;br&gt;
+&lt;br&gt;
+
+---
+background-image: url(images/new_rmd.png)
+background-size: 45%
+background-position: 50% 70%
+
+# Crear un nuevo `.Rmd`
+.center[File &gt; New File &gt; RMarkdown...]
+
+---
+# Estructura de un `.Rmd`
+
+````
+--- 
+title: "Ejercicio1"
+author: "Gaby"
+date: "14/5/2020" 
+output: html_document
+--- 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple 
+formatting syntax for authoring HTML, PDF, and 
+MS Word documents...
+
+You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+````
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**YAML**
+]
+
+.right-column[
+````
+--- 
+*title: "Ejercicio1"
+*author: "Gaby"
+*date: "14/5/2020" 
+*output: html_document
+--- 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple 
+formatting syntax for authoring HTML, PDF, and 
+MS Word documents...
+
+You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+````
+]
+
+
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**TEXTO**
+]
+
+.right-column[
+````
+--- 
+title: "Ejercicio1"
+author: "Gaby"
+date: "14/5/2020" 
+output: html_document
+--- 
+
+*## R Markdown
+
+*This is an R Markdown document. Markdown is a simple 
+*formatting syntax for authoring HTML, PDF, and 
+*MS Word documents...
+
+*You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+````
+]
+
+
+
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**CHUNK 
+(CÓDIGO)**
+]
+
+.right-column[
+````
+--- 
+title: "Ejercicio1"
+author: "Gaby"
+date: "14/5/2020" 
+output: html_document
+--- 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple 
+formatting syntax for authoring HTML, PDF, and 
+MS Word documents...
+
+You can embed an R code chunk like this:
+
+*```{r}
+*summary(cars)
+*```
+
+````
+]
+
+---
+
+# YAML (“yet another markup language”)
+
+Contiene los metadatos de mi documento, permite controlar las configuraciones de todo el documento. 
+
+--
+
+## .gray[Ejercicio 1]
+
+El ejercicio 1 consiste en modificar el YAML para obtener diferentes formatos de salida. Usemos por ejemplo:
+
+--
+
++ `output: pdf_document`
+
++ `output: html_document`
+
++ `output: word_document`
+
+---
+# Texto
+
+El texto en los `.Rmd` está escrito en Markdown, colección de *convenciones* para dar formato a archivos de texto plano.   
+--
+
+### .gray[Formatos:]
+.pull-left[
+ ```
+ Texto plano 
+ 
+ *cursiva* o _cursiva_
+
+ **negrita** o __negrita__
+ 
+ `código`
+ 
+ &gt; cita en bloque
+```
+]
+
+.pull-right[
+Texto plano 
+ 
+*cursiva* o _cursiva_
+
+**negrita** o __negrita__
+ 
+`código`
+ 
+&gt; cita en bloque
+
+]
+
+---
+### .gray[Encabezados]
+
+.pull-left[
+```
+# Nivel 1
+ 
+## Nivel 2
+ 
+### Nivel 3
+
+#### Nivel 4
+
+##### Nivel 5
+```
+]
+
+.pull-right[
+# Nivel 1
+ 
+## Nivel 2
+ 
+### Nivel 3
+
+#### Nivel 4
+
+##### Nivel 5]
+
+
+---
+### .gray[Listas]
+
+.pull-left[
+```
++ Elemento no numerado
+
++ Elemento no numerado
+
+  + Sub elemento
+
+1. Elemento numerado
+
+1. Elemento numerado (automático)
+```
+]
+
+.pull-right[
++ Elemento no numerado
+
++ Elemento no numerado
+
+  + Sub elemento
+
+1. Elemento numerado
+
+1. Elemento numerado (automático)
+]
+
+--
+
+### .gray[Links]
+
+``` 
+[link DATA UC](http://datascience.uc.cl/) 
+```
+[link DATA UC](http://datascience.uc.cl/)
+
+--
+
+o también:
+```
+&lt;http://datascience.uc.cl/&gt; 
+```
+&lt;http://datascience.uc.cl/&gt;
+
+
+---
+### .gray[Imágenes]
+
+```
+![](images/rladies.png)
+```
+--
+
+![](images/rladies.png)
+
+--
+&lt;br&gt;
+&lt;br&gt;
+&lt;small&gt; Una guía para formato de texto las pueden encontrar en: [aquí](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+&lt;/small&gt;
+
+---
+## .gray[Ejercicio 2] 
+
+Vamos a escribir algo de texto.
+.center[
+![](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)
+]
+
+---
+## Chunk o bloque de código
+
+Para ejecutar código en un documento `Rmd` necesitamos insertar un **chunk**:
++ Podemos usar `Ctrl + Alt + I`.
++ También podemos usar el botón de insertar.
++ O escribir manualmente: ```` ```{r} ```` y ```` ``` ````
+.center[
+![](images/chunk.png)
+]
+
+---
+
+### .gray[Opciones del chunk]
+La siguiente tabla muestra lo que se omite con cada opción.
+.center[
+![](images/opciones.PNG)
+]
+
+Fuente: [R para Ciencia de datos](https://es.r4ds.hadley.nz/r-markdown.html#bloques-de-código)
+
+---
+### .gray[Ejercicio 3]
+
+Vamos a analizar alguno datos y ver cómo funcionan las diferentes opciones de los bloques de código.
+
+.center[
+![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
+]
+
+---
+class:inverse, middle
+
+#Recursos recomendados:
+
+* [R Markdown The Difinitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+* Cap. 27 de [R for Data Science](https://r4ds.had.co.nz/) (inglés)
+
+* Cap. 27 de [R para Ciencia de Datos](https://es.r4ds.hadley.nz/) (versión español)
+
+* [Cheetsheets](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+* [Sitio web de RMarkdown](https://rmarkdown.rstudio.com/)
+
+* La presentación y ejercicios realizados en este taller los encuentran en [este REPOSITORIO](https://github.com/GabySandovalM/RM_DataUC_taller)
+
+---
+class: inverse, middle
+
+.center[**!Nos vemos en la próxima sesión!**]
+.center[
+![](https://media.giphy.com/media/m9eG1qVjvN56H0MXt8/giphy.gif)
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"slide-level": 2,
+"center": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
