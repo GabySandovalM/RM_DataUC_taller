@@ -6,6 +6,6 @@ Fecha: 14 y 19 de mayo de 2020.
 
 - Presentación Dia 1 [AQUÍ](https://gabysandovalm.github.io/RM_DataUC_taller/Presentacion_Dia1#1)
 
-- Presentación Día 2 [AQUÍ](https://gabysandovalm.github.io/RM_DataUC_taller/Presentacion_Dia1#1)
+- Presentación Día 2 [AQUÍ](https://gabysandovalm.github.io/RM_DataUC_taller/Presentacion_Dia2#1)
 
 - Ejercicios
