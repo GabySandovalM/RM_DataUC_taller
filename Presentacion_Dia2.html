@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Taller de RMarkdown</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriela Sandoval" />
+    <link href="Presentacion_Dia2_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="Presentacion_Dia2_files/remark-css-0.0.1/rladies.css" rel="stylesheet" />
+    <link href="Presentacion_Dia2_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="Presentacion_Dia2_files/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+&lt;style type="text/css"&gt;
+.silver{color: silver;}
+.gray{color: darkgray;}
+&lt;/style&gt;
+
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;text&lt;/span&gt;&lt;/div&gt;
+--&gt;
+
+.pull-left[
+# Taller de RMarkdown
+## Data UC
+### .gray[Aprendamos sobre reportes automáticos y análisis reproducibles.]
+### .gray[Gabriela Sandoval]
+### .gray[19/mayo/2020]
+]
+
+.pull-right[
+.center[
+![](images/rmarkdown.png)
+]]
+---
+class: middle
+
+## Gaby Sandoval
+
+&lt;img class="circle" src="https://github.com/gabysandovalm.png" width="150px"/&gt;
+
+Estudiante del Doctorado en Estadística de la UC. 
+
+Co-organizadora de [RLadies-Santiago](https://www.meetup.com/es/rladies-scl/).
+
+Pueden encontrarme en:
+
+[<i class="fab  fa-twitter "></i>@gabysandovalm](http://twitter.com/gabysandovalm)  
+[<i class="fab  fa-github "></i> @gabysandovalm](http://github.com/gabysandovalm)
+
+---
+class: middle
+# Sobre el taller
+![](images/ciclo.png)
+&lt;small&gt;Ilustración por: Allison Horst, adaptación de: [R4DS](https://r4ds.had.co.nz/explore-intro.html)&lt;/small&gt;
+
+---
+class: inverse center middle
+
+# RECORDEMOS...
+
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**YAML**
+] 
+
+.right-column[
+````markdown
+--- 
+*title: "Ejercicio1"
+*author: "Gaby"
+*date: "14/5/2020" 
+*output: html_document
+--- 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a 
+simple formatting syntax for authoring HTML, 
+PDF, and MS Word documents...
+
+You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+````
+]
+
+
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**TEXTO**
+]
+
+.right-column[
+````markdown
+--- 
+title: "Ejercicio1"
+author: "Gaby"
+date: "14/5/2020" 
+output: html_document
+--- 
+
+*## R Markdown
+
+*This is an R Markdown document. Markdown is a 
+*simple formatting syntax for authoring HTML, 
+*PDF, and MS Word documents...
+
+*You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+````
+]
+
+
+
+---
+# Estructura de un `.Rmd`
+
+.left-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+**CHUNK 
+(CÓDIGO)**
+]
+
+.right-column[
+````markdown
+--- 
+title: "Ejercicio1"
+author: "Gaby"
+date: "14/5/2020" 
+output: html_document
+--- 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a 
+simple formatting syntax for authoring HTML, 
+PDF, and MS Word documents...
+
+You can embed an R code chunk like this:
+
+*```{r}
+*summary(cars)
+*```
+
+````
+]
+
+---
+class: inverse, middle
++ Vimos como obtener los formatos de salida: pdf, html y word.
+
++ Usamos algunas de sintaxis de Markdown para dar formato al texto.
+
++ Vimos diferentes opciones para mostrar/ocultar/ejecutar código en los chunks.
+
++ Retomemos el Ejercicio 3
+
+---
+# Ejercicio 3
+
+- Usamos el set de datos `vuelos` (disponible en el paquete `datos`) que contiene información de vuelos que partieron desde la ciudad de NY durante el año 2013.
+
+--
+
+Para instalar el paquete `datos`:
+
+
+```r
+#install.packages("remotes")
+remotes::install_github("cienciadedatos/datos")
+```
+
+--
+ 
+- Nos interesa el  número de vuelos totales y vuelos con más de dos horas de atraso en la salida de las aerolineas United, American y Delta.
+
+--
+
+- Obtuvimos los resultados y los presentamos en una "tabla".
+
+--
+- Incluímos un par de gráficos.
+
+--
+
+- Adjuntamos el código usado en los gráficos.
+
+---
+class: middle, center
+
+## .gray[Ahora elaboremos un reporte base con esa información...]
+
+--
+## Para luego modificarlo <i class="fas  fa-rocket "></i>
+
+---
+# Personalización del documento
+
+La personalización va a depender del formato de salida. Empecemos con el formato .pdf
+
+--
+
+## Imágenes
+
+Una imagen se puede insertar con `![](ruta/nombre.jgp)`. 
+
+Sin embargo, una buena opción es usar la función `include_graphics()` del paquete `knitr`.
+
+````markdown
+```{r}
+knitr::include_graphics("ruta/nombre.jpg")
+``` ```` 
+
+---
+
+Al insertar la imagen de esa forma podemos usar algunas opciones del chunk y tener mayor control sobre las características, por ejemplo:
+
+````markdown
+```{r aerofoto, out.width="50%",fig.align='center',fig.cap="Aerolíneas principales"}
+knitr::include_graphics("aerolineas.jpg")
+``` ````
+--
+
+Nos da como resultado en el reporte:
+
+&lt;img src="images/ima.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Tablas
+
+Las salidas de de R en el documento se ven así:
+
+&lt;img src="images/tabla.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+Para darle formato a la tabla podemos usar la función `kable()` del paquete `knitr`.
+
+````markdown
+```{r}
+knitr::kable(nombre_matriz_df)
+``` ````
+
+Otro paquete de R muy útil para dar formato a tablas es `kableExtra`. Pueden consultar este [link](https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf) o mi cheatsheet de [tablas](https://github.com/GabySandovalM/RLadiesSantiago/blob/master/Taller_tablas/documento_tablas.pdf)
+---
+
+Por ejemplo:
+
+````markdown
+```{r}
+knitr::kable(resultado)
+``` ````
+--
+
+También podemos usar otros argumentos por ejemplo:
+
+````markdown 
+```{r}
+knitr::kable(resultado,caption = "Número de vuelos por aerolinea",digits = 2)
+``` ```` 
+--
+
+Y obtenemos los siguientes resultados:
+
+&lt;img src="images/tabla1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+## Gráficos
+
+Al igual que con las imágenes (que no se construyen en R), en este caso también podemos usar las opciones del chunk para parametrizar las características del output.
+
+````markdown 
+```{r grafico1, echo=FALSE, fig.align='center',fig.height=2,fig.width=3,fig.cap="Número de vuelos atrasados por mes"}
+
+vuelos %&gt;% filter(aerolinea %in% c("UA","AA","DL"), atraso_salida &gt;= 120)%&gt;% 
+  group_by(aerolinea,mes) %&gt;% 
+  summarise(atrasados =n()) %&gt;% 
+  ggplot(aes(x=as.factor(mes),y=atrasados,fill=aerolinea)) + 
+  geom_col(position = "dodge") + 
+  theme_bw() + xlab("mes")
+
+``` ````
+---
+Este código nos da como resultado en el informe:
+
+&lt;img src="images/graf.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+## Código en línea
+
+Cuando hacemos referencia a datos en el texto podemos enlazar resultados obtenidos y/o hacer cálculos usando **código en linea**.
+
+Por ejemplo:
+
+&lt;img src="images/concl1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+Proporciona como resultado: 
+
+&lt;img src="images/concl.png" width="90%" style="display: block; margin: auto;" /&gt;
+ 
+
+---
+## Algunas configuraciones adicionales
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+*output: pdf_document
+--- 
+````
+]
+
+.pull-right[
+&lt;img src="images/pdf1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Algunas configuraciones adicionales
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+*output:
+*  pdf_document: 
+*    toc: true
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/pdf2.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+## Algunas configuraciones adicionales
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  pdf_document: 
+    toc: true
+*   toc_depth: 2
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/pdf3.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Algunas configuraciones adicionales
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  pdf_document: 
+    toc: true
+    toc_depth: 2
+*   number_sections: true
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/pdf4.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+# Personalización de un reporte en html.
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+*output: html_document
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/html1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+# Personalización de un reporte en html.
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+*output:
+*  html_document: 
+*   toc: true
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/html2.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+# Personalización de un reporte en html.
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  html_document: 
+   toc: true
+*  toc_float: true
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/html3.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+# Personalización de un reporte en html.
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  html_document: 
+   toc: true
+   toc_float: true
+*  number_sections: true
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/html4.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Personalización de un reporte en html.
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  html_document: 
+   toc: true
+   toc_float: true
+   number_sections: true
+*  theme: darkly
+---
+````
+]
+
+.pull-right[
+&lt;img src="images/html5.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+Otros formatos se pueden ver [AQUI](https://bootswatch.com/)
+
+
+---
+# Personalización de un reporte en Word.
+
+.pull-left[
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+*output: word_document
+---
+````
+]
+
+.pull-right[
+Por defecto Word nos entrega un reporte con el siguiente formato:
+&lt;img src="images/word1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Personalización de un reporte en Word.
+
+Pero podemos incluir un formato desde un archivo `.docx` que se usa como referencia:
+
+````markdown
+--- 
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output:
+  word_document: 
+   toc: true
+   toc_depth: 1
+*  reference_docx: formato.docx
+---
+````
+
+---
+class:inverse, middle
+
+#Recursos recomendados:
+
+* [R Markdown The Difinitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+* Cap. 27 de [R for Data Science](https://r4ds.had.co.nz/) (inglés)
+
+* Cap. 27 de [R para Ciencia de Datos](https://es.r4ds.hadley.nz/) (versión español)
+
+* [Cheetsheets](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+* [Sitio web de RMarkdown](https://rmarkdown.rstudio.com/)
+
+* La presentación y ejercicios realizados en este taller los encuentran en [este REPOSITORIO](https://github.com/GabySandovalM/RM_DataUC_taller)
+
+---
+class: inverse, middle
+
+.center[**!Hasta la próxima!**]
+.center[
+![](https://media.giphy.com/media/gFwZfXIqD0eNW/giphy.gif)
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"slide-level": 2,
+"center": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
