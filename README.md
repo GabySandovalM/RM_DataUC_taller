@@ -10,4 +10,4 @@ Fecha: 14 y 19 de mayo de 2020.
 
 - Los ejercicios están en este [proyecto](https://rstudio.cloud/project/1213464) de RStudioCloud.
 
-- Videos disponibles [AQUI](http://datascience.uc.cl/workshop.php)
+- Videos disponibles [AQUÍ](http://datascience.uc.cl/workshop.php)
