@@ -1,0 +1,136 @@
+---
+title: "Reporte de Vuelos"
+author: "Gabriela Sandoval"
+date: "19/5/2020"
+output: 
+  pdf_document:
+    extra_dependencies: ["float"]
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+<!--Reporte basado en el Ejercicio 3-->
+
+\newpage
+# Introducción
+
+Usaremos el set de datos `vuelos` del paquete `datos`. Este conjunto de datos contiene información de vuelos que partieron desde la ciudad de NY durante el año **2013**.
+
+# Análisis
+
+## Aerolineas
+
+Quiero saber el número de vuelos que se atrasaron más de dos horas en la salida y fueron operados por:
+
++ United
++ American
++ Delta 
+
+```{r aerofoto, echo=FALSE, out.width="50%",fig.align='center',fig.cap="Aerolíneas principales"}
+knitr::include_graphics("aerolineas.jpg")
+```
+
+## Vuelos Atrasados y Totales
+
+```{r librerias, include=FALSE}
+library(datos) #aqui estan los datos
+library(tidyverse)
+```
+
+En la siguiente tabla se muestra el número de vuelos que se atrasaron más de dos horas en la salida y fueron operados por United, American o Delta y el porcentaje respecto al número total de vuelos correspondientes.
+
+
+```{r vuelos totales, echo=FALSE,results="hide" }
+vuelos_totales <- filter(vuelos,aerolinea %in% c("UA","AA","DL")) %>% 
+  group_by(aerolinea) %>% 
+  summarise( totales =n())
+vuelos_totales
+```
+
+```{r vuelos atrasados, echo=FALSE,results="hide" }
+vuelos_atrasados <- filter(vuelos,aerolinea %in% c("UA","AA","DL"), atraso_salida >= 120) %>% 
+group_by(aerolinea) %>% 
+  summarise(atrasados =n())
+vuelos_atrasados
+```
+
+```{r resultado, echo=FALSE, message=FALSE}
+resultado <- inner_join(vuelos_totales,vuelos_atrasados) %>% 
+  mutate(porcentaje = atrasados/totales * 100)
+knitr::kable(resultado,caption = "Número de vuelos por aerolínea",digits=2)
+```
+
+\vspace{1cm}
+<!--eso lo uamo para insertar espacio de linea-->
+
+Para complementar el análisis hacemos un par de gráficos:
+
+
+```{r grafico1, echo=FALSE, fig.align='center',fig.height=2,fig.width=3,fig.cap="Número de vuelos atrasados por mes"}
+vuelos %>% filter(aerolinea %in% c("UA","AA","DL"), atraso_salida >= 120)%>% 
+  group_by(aerolinea,mes) %>% 
+  summarise(atrasados =n()) %>% 
+  ggplot(aes(x=as.factor(mes),y=atrasados,fill=aerolinea)) + 
+  geom_col(position = "dodge") + 
+  theme_bw() + xlab("mes")
+```
+
+
+```{r grafico2, echo=FALSE, fig.align='center',fig.height=2,fig.width=3,fig.cap="Número de vuelos atrasados por mes 2",fig.pos="H"}
+vuelos %>% filter(aerolinea %in% c("UA","AA","DL"), atraso_salida >= 120)%>% 
+  group_by(aerolinea,mes) %>% 
+  summarise(atrasados =n()) %>% 
+  ggplot(aes(x=as.factor(mes),y=atrasados,fill=aerolinea)) + 
+  geom_col(show.legend = FALSE) + 
+  theme_bw() +
+  xlab("mes") +
+  facet_grid(~aerolinea) 
+```
+
+
+
+# Conclusiones
+
+La aerolinea con mayor número de atrasos en la salida fue `r top_n(vuelos_atrasados,1)[1] ` con `r top_n(vuelos_atrasados,1)[2]`.
+
+
+# Discusión
+
+¿Crees que la demanda de los meses de verano afecta?
+
+
+\newpage
+
+# Anexos
+<!-- este es un comentario-->
+
+Los códigos usados en los gráficos son:
+
+## Gráfico 1
+
+```{r code graf1, eval=FALSE}
+vuelos %>% filter(aerolinea %in% c("UA","AA","DL"), atraso_salida >= 120)%>% 
+  group_by(aerolinea,mes) %>% 
+  summarise(atrasados =n()) %>% 
+  ggplot(aes(x=as.factor(mes),y=atrasados,fill=aerolinea)) + 
+  geom_col(position = "dodge") + 
+  theme_bw() + xlab("mes")
+```
+
+## Gráfico 2
+
+```{r code graf2, eval = FALSE}
+vuelos %>% filter(aerolinea %in% c("UA","AA","DL"), atraso_salida >= 120)%>% 
+  group_by(aerolinea,mes) %>% 
+  summarise(atrasados =n()) %>% 
+  ggplot(aes(x=as.factor(mes),y=atrasados,fill=aerolinea)) + 
+  geom_col(show.legend = FALSE) + 
+  theme_bw() +
+  xlab("mes") +
+  facet_grid(~aerolinea) 
+```
+
+ 
+
+
